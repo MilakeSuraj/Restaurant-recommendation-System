@@ -165,6 +165,21 @@
       .slider img.active {
         opacity: 1;
         z-index: 2;
+        animation: popup 1.5s cubic-bezier(0.77, 0, 0.18, 1);
+      }
+      @keyframes popup {
+        0% {
+          opacity: 0;
+          transform: scale(0.92);
+        }
+        60% {
+          opacity: 1;
+          transform: scale(1.04);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
       }
       @media (max-width: 900px) {
         .main-content {
@@ -281,12 +296,19 @@
       function showSlide(idx) {
         slides.forEach((img, i) => {
           img.classList.toggle("active", i === idx);
+          // Remove and re-add animation to re-trigger popup
+          if (i === idx) {
+            img.style.animation = "none";
+            // Force reflow to restart animation
+            void img.offsetWidth;
+            img.style.animation = "";
+          }
         });
       }
       setInterval(() => {
         current = (current + 1) % total;
         showSlide(current);
-      }, 3000); // 3 seconds per image
+      }, 4500); // 4.5 seconds per image
 
       // Responsive fix: keep current slide on resize
       window.addEventListener("resize", () => showSlide(current));
