@@ -2,19 +2,17 @@
 
 ![Banner](https://img.shields.io/badge/AI%20Restaurant%20Recommender-Powered%20by%20ML-blueviolet?style=for-the-badge)
 
-![Banner](https://github.com/MilakeSuraj/Tic_Tac_Toe_Game/blob/main/Beige%20Modern%20Elegant%20Personal%20LinkedIn%20Banner%20(1).png?raw=true)
----
+## ![Banner](<https://github.com/MilakeSuraj/Tic_Tac_Toe_Game/blob/main/Beige%20Modern%20Elegant%20Personal%20LinkedIn%20Banner%20(1).png?raw=true>)
 
 ## Project Overview
 
-***A full-stack AI-powered web application that recommends restaurants based on user preferences, budget, dietary needs, and location. Combines collaborative and content-based filtering for smart, personalized suggestions.***
+**_A full-stack AI-powered web application that recommends restaurants based on user preferences, budget, dietary needs, and location. Combines collaborative and content-based filtering for smart, personalized suggestions._**
 
 ---
 
 ## Home Screen
 
 ![Home Screen](https://raw.githubusercontent.com/MilakeSuraj/Restaurant-recommendation-System/main/Screenshots/homeScreen.gif)
-
 
 ## Recommendation Screen
 
@@ -23,10 +21,6 @@
 ## Result Screen
 
 ![Result Screen](https://raw.githubusercontent.com/MilakeSuraj/Restaurant-recommendation-System/main/Screenshots/resultScreen.gif)
-
-
-
-
 
 ---
 
@@ -74,8 +68,6 @@ Restaurant-Recommendation-System/
 
 ---
 
-
-
 ---
 
 ## Model Architecture
@@ -94,6 +86,6 @@ Restaurant-Recommendation-System/
 
 ## Conclusion
 
-***This project demonstrates how machine learning can enhance dining decisions by providing tailored restaurant recommendations. The hybrid model ensures both personalization and discovery, making it a powerful tool for users exploring new or familiar areas.***
+**_This project demonstrates how machine learning can enhance dining decisions by providing tailored restaurant recommendations. The hybrid model ensures both personalization and discovery, making it a powerful tool for users exploring new or familiar areas._**
 
 ---
