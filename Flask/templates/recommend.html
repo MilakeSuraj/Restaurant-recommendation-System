@@ -2,78 +2,400 @@
 <html>
   <head>
     <title>Restaurant Recommendation System</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900|Great+Vibes&display=swap"
+      rel="stylesheet"
+    />
     <style>
       body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        color: black;
-        background-color: white;
+        margin: 0;
+        padding: 0;
+        font-family: "Playfair Display", serif;
+        background: #0a0a23;
+        color: #fff;
+        min-height: 100vh;
       }
       header {
         display: flex;
+        align-items: center;
         justify-content: space-between;
-        inline-size: 100%;
-        background-color: black;
-        color: white;
-        padding: 20px;
+        padding: 16px 60px 16px 60px;
+        background: rgba(10, 10, 35, 0.98);
+        box-shadow: 0 6px 32px 0 rgba(0, 0, 0, 0.22),
+          0 1.5px 8px 0 rgba(224, 192, 138, 0.08),
+          0 8px 32px 0 rgba(255, 255, 255, 0.18);
+        position: relative;
+        z-index: 10;
       }
-      header h1 {
-        margin: 0;
+      .logo {
+        font-family: "Great Vibes", cursive;
+        font-size: 2.2rem;
+        color: #e0c08a;
+        letter-spacing: 1px;
+        font-weight: 400;
       }
-      header div {
+      .nav-links {
         display: flex;
-        gap: 10px;
+        align-items: center;
+        gap: 32px;
+        font-size: 1.08rem;
       }
-      button {
-        background-color: black;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        text-align: center;
+      .nav-links a {
+        color: #fff;
         text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
+        transition: color 0.2s;
+      }
+      .nav-links a:hover {
+        color: #e0c08a;
+      }
+      .reserve-btn {
+        border: 1.5px solid #fff;
+        background: transparent;
+        color: #fff;
+        padding: 10px 26px;
+        font-size: 1.08rem;
+        border-radius: 2px;
+        margin-left: 28px;
+        font-family: "Playfair Display", serif;
         cursor: pointer;
-        transition: background-color 0.3s ease;
+        transition: background 0.2s, color 0.2s;
       }
-      button:hover {
-        background-color: #444;
+      .reserve-btn:hover {
+        background: #fff;
+        color: #0a0a23;
       }
-      .middle-content {
+      .main-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 60px;
+        min-height: 70vh;
+        position: relative; /* for absolute children */
+      }
+      .main-left {
+        max-width: 54%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+      }
+      .slider-container {
+        width: 500px;
+        max-width: 100%;
+        height: 350px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        background: transparent;
+        position: relative;
+        /* Always visible by default */
+        opacity: 1;
+        transform: none;
+        transition: opacity 0.6s cubic-bezier(0.77, 0, 0.18, 1),
+          transform 0.6s cubic-bezier(0.77, 0, 0.18, 1);
+      }
+      .slider-container.popup-animate {
+        /* Animation for popup effect */
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        animation: sliderPopup 0.7s cubic-bezier(0.77, 0, 0.18, 1);
+      }
+      @keyframes sliderPopup {
+        from {
+          opacity: 0;
+          transform: scale(0.95) translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
+      }
+      .slider {
+        width: 100%;
+        height: 100%;
+        position: relative;
+      }
+      .slider img {
+        width: 500px;
+        height: 350px;
+        object-fit: contain;
+        background: transparent;
+        user-select: none;
+        pointer-events: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        transition: opacity 0.7s;
+        z-index: 1;
+      }
+      .slider img.active {
+        opacity: 1;
+        z-index: 2;
+      }
+      .main-right {
+        max-width: 30%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: center;
+        height: 100%;
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        /* Remove or reduce left padding to decrease space */
+        padding-left: 10px;
+        z-index: 2;
+      }
+      /* Popup-like form container always visible */
+      .form-popup-container {
+        background: #181830;
+        color: #fff;
+        padding: 40px 32px 32px 32px;
+        border-radius: 10px;
+        width: 340px;
+        height: 400px; /* Increased height */
+        box-shadow: 0 6px 32px 0 rgba(0, 0, 0, 0.22);
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
-        text-align: center;
-        padding: 20px;
+        position: relative;
+        margin-right: 0;
+        margin-top: 0;
+        /* Optional: add a border for popup effect */
+        border: 2px solid #e0c08a;
+        /* Animation initial state */
+        opacity: 0;
+        transform: scale(0.85) translateY(40px); /* Start lower */
+        transition: opacity 0.5s cubic-bezier(0.77, 0, 0.18, 1),
+          transform 0.5s cubic-bezier(0.77, 0, 0.18, 1);
       }
-      input[type="text"] {
-        inline-size: 100%;
+      .form-popup-container.popup-show {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        animation: floatUp 0.7s cubic-bezier(0.77, 0, 0.18, 1);
+      }
+      @keyframes floatUp {
+        from {
+          opacity: 0;
+          transform: scale(0.85) translateY(40px);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
+      }
+      .form-popup-container h2 {
+        margin-top: 0;
+        margin-bottom: 18px;
+        font-size: 1.4rem;
+        color: #e0c08a;
+      }
+      .form-popup-container input[type="text"] {
+        width: 100%;
         padding: 12px 20px;
-        margin: 8px 0;
+        margin: 8px 0 18px 0;
         box-sizing: border-box;
-        border: 2px solid black;
+        border: 2px solid #e0c08a;
         border-radius: 4px;
+        font-size: 1rem;
+        background: #22223a;
+        color: #fff;
+      }
+      .form-popup-container input[type="submit"] {
+        background-color: #e0c08a;
+        color: #181830;
+        border: none;
+        padding: 12px 28px;
+        border-radius: 2px;
+        font-size: 1.08rem;
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s;
+      }
+      .form-popup-container input[type="submit"]:hover {
+        background: #fff;
+        color: #0a0a23;
+      }
+      .float-up {
+        opacity: 0;
+        transform: translateY(40px);
+        animation: floatUpText 0.8s cubic-bezier(0.77, 0, 0.18, 1) forwards;
+      }
+      @keyframes floatUpText {
+        from {
+          opacity: 0;
+          transform: translateY(40px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @media (max-width: 900px) {
+        .main-content {
+          flex-direction: column;
+          padding: 0 16px;
+        }
+        .main-left,
+        .main-right {
+          max-width: 100%;
+          position: static;
+          left: unset;
+          right: unset;
+          top: unset;
+          bottom: unset;
+          padding-left: 0;
+        }
+        .main-left {
+          justify-content: center;
+          margin-bottom: 32px;
+        }
+        .slider-container {
+          width: 100%;
+          height: 220px;
+        }
+        .slider img {
+          width: 100vw;
+          height: 220px;
+        }
+        header {
+          flex-direction: column;
+          gap: 18px;
+          padding: 12px 10px 12px 10px;
+        }
+        .main-right {
+          align-items: center;
+          margin-top: 24px;
+        }
+        .form-popup-container {
+          width: 100%;
+          min-width: 0;
+          height: auto; /* Let it grow naturally on mobile */
+        }
       }
     </style>
   </head>
   <body>
     <header>
-      <h1>Restaurant Recommendation System</h1>
-      <div>
-        <button onclick="location.href='/'">Home</button>
-        <button onclick="location.href='/recommend'">Recommend</button>
-      </div>
+      <div class="logo">Restaurant Recommendation</div>
+      <nav class="nav-links">
+        <a href="/">Home</a>
+        <button class="reserve-btn" onclick="location.href='/recommend'">
+          Recommend
+        </button>
+      </nav>
     </header>
-    <div class="middle-content">
-      <h2>Restaurant Name</h2>
-      <form action="/result" method="post">
-        <input type="text" id="restaurant" name="restaurant_name" />
-        <input type="submit" value="Click to see the recommendation" />
-      </form>
+    <div class="main-content">
+      <div
+        class="main-left"
+        style="flex-direction: column; align-items: flex-start"
+      >
+        <div style="margin-bottom: 32px; max-width: 520px">
+          <div
+            class="float-up"
+            style="
+              font-size: 1.7rem;
+              font-weight: 700;
+              color: #ffe066;
+              margin-bottom: 10px;
+              margin-top: 20px;
+            "
+          >
+            Craving something delicious?
+          </div>
+          <div
+            class="float-up"
+            style="font-size: 1.08rem; color: #fff; line-height: 1.6"
+          >
+            Our smart restaurant recommendation system is here to help you
+            discover the perfect place to eat, anytime, anywhere. Whether you're
+            in the mood for something spicy, sweet, or savory, we’ll analyze
+            your preferences and suggest top-rated restaurants near you —
+            personalized just for your taste.
+          </div>
+        </div>
+        <div class="slider-container" id="sliderContainer">
+          <div class="slider" id="slider">
+            <img
+              src="{{ url_for('static', filename='chiken.png') }}"
+              alt="Image 1"
+              class="active"
+            />
+            <img
+              src="{{ url_for('static', filename='image2.png') }}"
+              alt="Image 2"
+            />
+            <img
+              src="{{ url_for('static', filename='image3.png') }}"
+              alt="Image 3"
+            />
+            <img
+              src="{{ url_for('static', filename='image4.png') }}"
+              alt="Image 4"
+            />
+            <img
+              src="{{ url_for('static', filename='image5.png') }}"
+              alt="Image 5"
+            />
+            <img
+              src="{{ url_for('static', filename='image6.png') }}"
+              alt="Image 6"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="main-right">
+        <div class="form-popup-container" id="popupForm">
+          <img
+            src="{{ url_for('static', filename='cheaf.png') }}"
+            alt="Chef"
+            style="
+              width: 90px;
+              height: 150px;
+              margin-top: 20;
+              margin-bottom: 40px;
+              display: block;
+            "
+          />
+          <h2>Enter Restaurant Name</h2>
+          <form action="/result" method="post">
+            <input
+              type="text"
+              id="restaurant"
+              name="restaurant_name"
+              placeholder="Type restaurant name..."
+              required
+            />
+            <input type="submit" value="See Recommendation" />
+          </form>
+        </div>
+      </div>
     </div>
+    <script>
+      // Slider logic (same as index)
+      const slides = document.querySelectorAll("#slider img");
+      let current = 0;
+      const total = slides.length;
+      function showSlide(idx) {
+        slides.forEach((img, i) => {
+          img.classList.toggle("active", i === idx);
+        });
+      }
+      setInterval(() => {
+        current = (current + 1) % total;
+        showSlide(current);
+      }, 3000);
+      window.addEventListener("resize", () => showSlide(current));
+
+      // Popup animation on load
+      window.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("popupForm").classList.add("popup-show");
+        document
+          .getElementById("sliderContainer")
+          .classList.add("popup-animate");
+      });
+    </script>
   </body>
 </html>
