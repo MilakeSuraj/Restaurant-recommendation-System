@@ -1,121 +1,91 @@
-# **Restaurant Recommendation System**
+# 🍽️ Restaurant Recommendation System
+
+![Banner](https://img.shields.io/badge/AI%20Restaurant%20Recommender-Powered%20by%20ML-blueviolet?style=for-the-badge)
+
+## ![Banner](<https://github.com/MilakeSuraj/Tic_Tac_Toe_Game/blob/main/Beige%20Modern%20Elegant%20Personal%20LinkedIn%20Banner%20(1).png?raw=true>)
+
+## Project Overview
+
+**_A full-stack AI-powered web application that recommends restaurants based on user preferences, budget, dietary needs, and location. Combines collaborative and content-based filtering for smart, personalized suggestions._**
+
 ---
 
-## **Project Description**
-- This project focuses on developing a smart restaurant recommendation system that delivers personalized suggestions based on user preferences, budget, dietary restrictions, and current location.
-- A hybrid recommendation model combining **collaborative filtering** and **content-based filtering** techniques is implemented to provide accurate and relevant results.
-- The system adapts dynamically based on user inputs and geolocation data, enhancing the user's decision-making process when exploring dining options.
+## Home Screen
 
-## **Screenshots**
+![Home Screen](https://raw.githubusercontent.com/MilakeSuraj/Restaurant-recommendation-System/main/Screenshots/homeScreen.gif)
 
-### Home Page:
-<p align="center">
-<img src="https://drive.google.com/uc?export=view&id=1A7LQAsf-VSwH9aaV3Hoe6HNFSkcW75xA" width="800" alt="Image 2">
-</p>
+## Recommendation Screen
 
-### Input Page:
-<p align="center">
- <img src="https://drive.google.com/uc?export=view&id=1UdSUpmxsSX8U4m-FUajcVXhyxH7Hbbcp" width="800" alt="Image 1">
-</p>
+![Recommendation Screen](https://raw.githubusercontent.com/MilakeSuraj/Restaurant-recommendation-System/main/Screenshots/RecommendationScreen.gif)
 
-### Recommendation Output:
-<p align="center">
- <img src="https://drive.google.com/uc?export=view&id=1HuFP_R1lDc6fNU0wAM5POq5HwfuipjEI" width="800" alt="Image 3">
-</p>
+## Result Screen
 
-## **Installation and Setup**
+![Result Screen](https://raw.githubusercontent.com/MilakeSuraj/Restaurant-recommendation-System/main/Screenshots/resultScreen.gif)
 
-### Using Conda (Recommended)
-```bash
-# Create a new conda environment
-conda create -n restaurant_recommender python=3.10
+---
 
-# Activate the environment
-conda activate restaurant_recommender
+## Features
 
-# Clone the repository
-git clone https://github.com/Rohitmh09/Restaurant-Recommendation-System.git
-cd Restaurant-Recommendation-System/Flask
+- **Hybrid Recommendation Engine:** Combines collaborative filtering (SVD) and content-based filtering for accurate, relevant results.
+- **Personalized Suggestions:** Takes into account user preferences, budget, cuisine, and location.
+- **Dynamic Adaptation:** Learns from user input and adapts recommendations.
+- **Modern Web UI:** Clean, user-friendly interface built with Flask, HTML, and CSS.
+- **Data Visualization:** Interactive charts and plots for insights into restaurant data.
+- **Cold-Start Solution:** Hybrid approach helps recommend even for new users or restaurants.
 
-# Install dependencies
-pip install -r requirements.txt
+---
+
+## Technologies Used
+
+- **Backend:** Python 3.10, Flask
+- **Machine Learning:** scikit-learn, Surprise (SVD), NLTK
+- **Data Processing:** Pandas, NumPy
+- **Visualization:** Matplotlib, Seaborn, Plotly
+- **Frontend:** HTML, CSS, JavaScript, Jinja2 (Flask templating)
+- **Other:** Google Colab (for model development), CSV dataset
+
+---
+
+## Project Structure
+
 ```
-### Using Python venv
-```bash
-# Create a virtual environment
-python -m venv venv
-
-# Activate the environment
-# On Windows:
-venv\Scripts\activate
-# On macOS/Linux:
-source venv/bin/activate
-
-# Install dependencies
-pip install -r requirements.txt
-```
-
-### Running the Application
-```bash
-# Navigate to the Flask directory
-cd Flask
-
-# Run the Flask web application
-python app1.py
-
-# Visit http://localhost:5000 to access the app
-```
-### Project Structure:
-
-```bash
 Restaurant-Recommendation-System/
-├── Documentation...
+│
 ├── Flask/
-│   ├── __pycache__/                # Compiled Python cache files
-│   ├── static/                     # Static assets (Images)
-│   ├── templates/                  # HTML templates for the frontend
-│   ├── app1.py                     # Flask application entry point
+│   ├── app1.py                     # Flask backend
 │   ├── Final_Development_Phase.ipynb  # Flask dev notebook
 │   ├── requirements.txt            # Python dependencies
-│   └── restaurant1.csv             # Restaurant dataset
+│   ├── restaurant1.csv             # Processed restaurant dataset
+│   ├── static/                     # Static assets (images, CSS)
+│   └── templates/                  # HTML templates
+│
 ├── Model/
-    └── Final_Development_Phase.ipynb  # Model training and evaluation notebook
+│   └── Final_Development_Phase.ipynb  # Model training & evaluation notebook
+│
+├── Documentation...                # Additional docs/screenshots
+└── README.md                       # Project overview (this file)
 ```
-
-## **Technologies Used**
-- **Python 3.10** – Core programming language
-- **Flask** – Lightweight web framework to build the backend API
-- **Scikit-learn** – For building and evaluating machine learning models
-- **Surprise** – Specialized library for collaborative filtering (e.g., SVD)
-- **Pandas / NumPy** – For data manipulation and preprocessing
-- **NLTK** – For natural language processing and cleaning review text
-- **Matplotlib / Seaborn / Plotly** – For data visualization and EDA
-- **HTML / CSS / JavaScript** – For designing the frontend interface
 
 ---
 
-## **Model Architecture**
-This project uses a **Hybrid Recommendation Model** combining the strengths of:
+---
 
-### 🔹 Content-Based Filtering
-- Analyzes restaurant attributes like cuisine type, average cost, rating, and delivery option.
-- Matches these with user-stated preferences to recommend relevant restaurants.
+## Model Architecture
 
-### 🔹 Collaborative Filtering (SVD)
-- Uses historical user rating data to find similar users and suggest restaurants based on collective behavior.
-- Implemented using the `Surprise` library's Singular Value Decomposition (SVD) algorithm.
+- **Content-Based Filtering:** Matches restaurant attributes (cuisine, cost, rating) to user preferences.
+- **Collaborative Filtering (SVD):** Learns from user ratings to suggest restaurants similar users enjoyed.
+- **Hybrid Approach:** Merges both strategies for robust, personalized recommendations.
 
-### 🔹 Hybrid Approach
-- Merges both filtering strategies to solve the cold-start and sparsity problems.
-- Balances personalization with discovery of new or less popular options.
+---
 
-## **Dataset**
-The dataset is sourced from **Kaggle** and titled:
+## Dataset
 
-> [Zomato Bangalore Restaurants Dataset by Himanshu Poddar](https://www.kaggle.com/datasets/himanshupoddar/zomato-bangalore-restaurants)
+- **Source:** [Zomato Bangalore Restaurants Dataset by Himanshu Poddar (Kaggle)](https://www.kaggle.com/datasets/himanshupoddar/zomato-bangalore-restaurants)
 
-## **Conclusion**
-This project successfully demonstrates how **machine learning and recommendation systems** can simplify dining decisions by tailoring restaurant suggestions to user preferences and behavior. It offers a powerful and adaptive solution for users in both familiar and unfamiliar areas. The hybrid model ensures balance between personalized results and discovery of new options. This project lays the foundation for more advanced, real-time, and location-aware food recommendation engines.
+---
 
+## Conclusion
 
+**_This project demonstrates how machine learning can enhance dining decisions by providing tailored restaurant recommendations. The hybrid model ensures both personalization and discovery, making it a powerful tool for users exploring new or familiar areas._**
 
+---

@@ -1,94 +1,216 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Restaurant Recommendation System</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900|Great+Vibes&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        body {
-            /* display: flex; */
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            color: black;
-            background-color: white;
-        }
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Playfair Display", serif;
+        background: #0a0a23;
+        color: #fff;
+        min-height: 100vh;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 60px 16px 60px;
+        background: rgba(10, 10, 35, 0.98);
+        box-shadow: 0 6px 32px 0 rgba(0, 0, 0, 0.22),
+          0 1.5px 8px 0 rgba(224, 192, 138, 0.08),
+          0 8px 32px 0 rgba(255, 255, 255, 0.18);
+        position: relative;
+        z-index: 10;
+      }
+      .logo {
+        font-family: "Great Vibes", cursive;
+        font-size: 2.2rem;
+        color: #e0c08a;
+        letter-spacing: 1px;
+        font-weight: 400;
+      }
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+        font-size: 1.08rem;
+      }
+      .nav-links a {
+        color: #fff;
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .nav-links a:hover {
+        color: #e0c08a;
+      }
+      .recommend-btn {
+        border: 1.5px solid #fff;
+        background: transparent;
+        color: #fff;
+        padding: 10px 26px;
+        font-size: 1.08rem;
+        border-radius: 2px;
+        margin-left: 28px;
+        font-family: "Playfair Display", serif;
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s;
+      }
+      .recommend-btn:hover {
+        background: #fff;
+        color: #0a0a23;
+      }
+      .main-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 60px;
+        min-height: 70vh;
+      }
+      .result-title {
+        font-size: 1.7rem;
+        font-weight: 700;
+        color: #ffe066;
+        margin-bottom: 32px;
+        margin-top: 40px;
+        text-align: center;
+      }
+      .cards-container {
+        display: grid;
+        grid-template-columns: repeat(
+          auto-fit,
+          minmax(340px, 1fr)
+        ); /* min 340px for 320px card + gap */
+        gap: 32px; /* increased gap for more space between cards */
+        width: 100%;
+        max-width: 1200px; /* allow more cards in a row */
+        align-items: stretch;
+        justify-items: center;
+        padding-left: 40px; /* more horizontal padding */
+        padding-right: 40px; /* more horizontal padding */
+        box-sizing: border-box;
+      }
+      .restaurant-card {
+        background: #181830;
+        border: 2px solid #e0c08a;
+        border-radius: 10px;
+        box-shadow: 0 6px 32px 0 rgba(0, 0, 0, 0.22);
+        width: 320px;
+        height: 320px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 36px 32px 36px 32px; /* Increased and balanced padding */
+        gap: 16px;
+        transition: transform 0.2s;
+        box-sizing: border-box;
+        text-align: left;
+      }
+      .restaurant-card:hover {
+        transform: translateY(-6px) scale(1.02);
+        box-shadow: 0 12px 40px 0 rgba(224, 192, 138, 0.13);
+      }
+      .restaurant-name {
+        font-size: 1.1rem;
+        color: #e0c08a;
+        font-weight: 700;
+        margin-bottom: 2px;
+        line-height: 1.2;
+        word-break: break-word;
+      }
+      .restaurant-info-row {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        margin-top: 2px;
+      }
+      .info-label {
+        color: #ffe066;
+        font-weight: 600;
+        margin-right: 4px;
+        font-size: 0.98rem;
+      }
+      .info-value {
+        color: #fff;
+        font-weight: 400;
+        font-size: 0.98rem;
+        word-break: break-word;
+      }
+      @media (max-width: 900px) {
         header {
-            display: flex;
-            justify-content: space-between;
-            inline-size: 100%;
-            background-color: black;
-            color: white;
-            padding: 20px;
+          flex-direction: column;
+          gap: 18px;
+          padding: 12px 10px 12px 10px;
         }
-        header h1 {
-            margin: 0;
+        .main-content {
+          padding: 0 10px;
         }
-        header div {
-            display: flex;
-            gap: 10px;
+        .cards-container {
+          max-width: 100%;
+          grid-template-columns: repeat(
+            auto-fit,
+            minmax(240px, 1fr)
+          ); /* min 240px for 220px card + gap */
+          gap: 18px;
+          padding-left: 12px;
+          padding-right: 12px;
         }
-        button {
-            background-color: black;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+        .restaurant-card {
+          width: 220px;
+          height: 220px;
+          padding: 20px 14px 20px 14px; /* Increased and balanced padding for mobile */
         }
-        button:hover {
-            background-color: #444;
-        }
-        .middle-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 20px;
-        }
-        table {
-            border-collapse: collapse;
-            inline-size: 100%;
-        }
-        th, td {
-            text-align: start;
-            padding: 8px;
-            border-block-end: 1px solid #ddd;
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <h1>Restaurant Recommendation System</h1>
-        <div>
-            <button onclick="location.href='/'">Home</button>
-            <button onclick="location.href='/recommend'">Recommend</button>
-        </div>
+      <div class="logo">Restaurant Recommendation</div>
+      <nav class="nav-links">
+        <a href="/">Home</a>
+        <button class="recommend-btn" onclick="location.href='/recommend'">
+          Recommend
+        </button>
+      </nav>
     </header>
-    <div class="middle-content">
-        <h2>Here are the top recommended restaurants</h2>
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>Cuisines</th>
-                <th>Mean Rating (out of 5)</th>
-                <th>Cost (in thousands)</th>
-            </tr>
-            {% for restaurant in recommended_restaurants %}
-            <tr>
-                <td>{{ restaurant.name }}</td>
-                <td>{{ restaurant.cuisines }}</td>
-                <td>{{ restaurant['Mean Rating'] }}</td>
-                <td>{{ restaurant.cost }}</td>
-            </tr>
-            {% endfor %}
-        </table>
+    <div class="main-content">
+      <div class="result-title">Here are the top recommended restaurants</div>
+      <div class="cards-container">
+        {% for restaurant in recommended_restaurants %}
+        <div class="restaurant-card">
+          <img
+            src="{{ url_for('static', filename='dish.png') }}"
+            alt="Dish"
+            style="
+              width: 140px;
+              height: 140px;
+              display: block;
+              margin: 0 auto 0px auto; /* Decreased bottom margin */
+            "
+          />
+          <div class="restaurant-name">{{ restaurant.name }}</div>
+          <div class="restaurant-info-row">
+            <div>
+              <span class="info-label">Cuisines:</span>
+              <span class="info-value">{{ restaurant.cuisines }}</span>
+            </div>
+            <div>
+              <span class="info-label">Mean Rating:</span>
+              <span class="info-value">{{ restaurant['Mean Rating'] }}</span>
+            </div>
+            <div>
+              <span class="info-label">Cost:</span>
+              <span class="info-value">{{ restaurant.cost }}</span>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
     </div>
-</body>
+  </body>
 </html>
-
-

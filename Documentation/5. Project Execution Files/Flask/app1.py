@@ -1,24 +1,28 @@
+import warnings
 from lib2to3.pgen2.pgen import DFAState
+
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import seaborn as sb
-import matplotlib.pyplot as plt
-import plotly.offline as py
 import plotly.graph_objs as go
+import plotly.offline as py
+import seaborn as sb
 import seaborn as sns
-import warnings
+
 warnings.filterwarnings('always')
 warnings.filterwarnings('ignore')
 import nltk
+
 nltk.download('punkt')
+import pickle
+
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from sklearn.metrics.pairwise import linear_kernel
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.feature_extraction.text import TfidfVectorizer
+
 import flask
 from flask import Flask, redirect, render_template, request, url_for
-import pickle
 
 app = Flask(__name__)
 
@@ -26,7 +30,7 @@ app = Flask(__name__)
 tfidf_matrix = None
 
 # Load the updated dataset
-zomato_df = pd.read_csv(r'E:\DS-Restaurant_Recommendation_System\Flask\restaurant1.csv')
+zomato_df = pd.read_csv('restaurant1.csv')
 
 def get_recommendations(restaurant_name):
     # Find the details of the input restaurant
