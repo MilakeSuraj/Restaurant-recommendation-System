@@ -68,7 +68,7 @@ Restaurant-Recommendation-System/
 
 ---
 
----
+
 
 ## Model Architecture
 
